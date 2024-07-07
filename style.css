@@ -57,5 +57,17 @@ li {
 }
 
 #practice form {
+   width: 60%;
    padding: 1rem;
+   margin: 0 auto;
+   display: grid;
+   grid-template-columns: auto 1fr;
+   gap: 0.4rem;
+   align-items: center;
+}
+
+#practice input,
+#practice select {
+   padding: 0.2rem;
+   border: 1px solid black;
 }
