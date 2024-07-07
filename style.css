@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html {
+   font-family: "Roboto", sans-serif;
+   font-size: 24px;
+}
+
+a {
+   text-decoration: none;
+   color: inherit;
+}
+
+ul {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+
+li {
+   list-style: none;
+   font-weight: 400;
+   padding: 10px 20px;
+   cursor: pointer;
+}
+
+#menu ul {
+   border-bottom: 1px solid black;
+}
+
+#menu li {
+   width: 100%;
+   padding: 0.5rem;
+   text-align: center;
+   transition: background-color 0.4s, color 0.4s;
+}
+
+#menu li:hover {
+   background-color: black;
+   color: white;
+}
+
+/* ====================== Practice ======================  */
+
+#practice {
+   width: 100%;
+}
+
+#practice h1 {
+   margin: 1rem auto 0.5rem;
+   text-align: center;
+}
+
+#practice form {
+   padding: 1rem;
+}
