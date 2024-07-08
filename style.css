@@ -6,12 +6,18 @@
    box-sizing: border-box;
 }
 
+:root {
+   --common-border: 1px solid black;
+   --thick-border: 4px solid black;
+}
+
 html {
    font-family: "Roboto", sans-serif;
    font-size: 24px;
 }
 
 a {
+   width: 100%;
    text-decoration: none;
    color: inherit;
 }
@@ -19,6 +25,10 @@ a {
 button {
    background-color: transparent;
    border: none;
+}
+
+main {
+   margin: 1rem;
 }
 
 ul {
@@ -35,7 +45,7 @@ li {
 }
 
 #menu ul {
-   border-bottom: 1px solid black;
+   border-bottom: var(--common-border);
 }
 
 #menu li {
@@ -70,14 +80,14 @@ li {
 #practice input,
 #practice select {
    padding: 0.2rem;
-   border: 1px solid black;
+   border: var(--common-border);
 }
 
 #practice button {
    grid-column: span 2;
    width: 100%;
    padding: 0.4rem;
-   border: black 1px solid;
+   border: var(--common-border);
    transition: background-color 0.4s, color 0.4s;
 }
 
@@ -85,6 +95,7 @@ li {
    background-color: black;
    color: white;
 }
+
 #error-message {
    grid-column: span 2;
    color: red;

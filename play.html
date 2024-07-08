@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Play</title>
+      <link rel="stylesheet" href="normalize.css" />
+      <link rel="stylesheet" href="style.css" />
+   </head>
+   <body>
+      <main id="play">
+         <div
+            style="
+               width: fit-content;
+               padding: 0.4rem;
+               border: var(--common-border);
+            "
+         >
+            Number of Questions: <span id="no-questions"></span>
+         </div>
+         <div
+            style="
+               padding: 4rem;
+               margin-top: 1rem;
+               border: var(--thick-border);
+               font-size: 2rem;
+               text-align: center;
+            "
+         >
+            <span id="question"></span> = <span id="answer"></span>
+         </div>
+      </main>
+   </body>
+   <script src="script.js"></script>
+   <script src="play.js"></script>
+</html>
