@@ -16,6 +16,11 @@ a {
    color: inherit;
 }
 
+button {
+   background-color: transparent;
+   border: none;
+}
+
 ul {
    display: flex;
    justify-content: space-around;
@@ -45,11 +50,7 @@ li {
    color: white;
 }
 
-/* ====================== Practice ======================  */
-
-#practice {
-   width: 100%;
-}
+/* ====================== Practice Selection Page =======================  */
 
 #practice h1 {
    margin: 1rem auto 0.5rem;
@@ -71,3 +72,23 @@ li {
    padding: 0.2rem;
    border: 1px solid black;
 }
+
+#practice button {
+   grid-column: span 2;
+   width: 100%;
+   padding: 0.4rem;
+   border: black 1px solid;
+   transition: background-color 0.4s, color 0.4s;
+}
+
+#practice button:hover {
+   background-color: black;
+   color: white;
+}
+#error-message {
+   grid-column: span 2;
+   color: red;
+   font-size: 0.8rem;
+}
+
+/* ================= Play Page ================ */
