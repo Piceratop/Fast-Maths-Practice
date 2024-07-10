@@ -27,14 +27,9 @@ button {
    border: none;
 }
 
-main {
-   margin: 1rem;
-}
-
-ul {
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
+h1 {
+   margin: 1rem auto 0.5rem;
+   text-align: center;
 }
 
 li {
@@ -44,8 +39,33 @@ li {
    cursor: pointer;
 }
 
-#menu ul {
-   border-bottom: var(--common-border);
+main {
+   margin: 1rem;
+}
+
+table {
+   width: 100%;
+   border: var(--thick-border);
+   border-collapse: collapse;
+}
+
+td,
+th {
+   padding: 0.4rem;
+}
+
+td {
+   border: var(--common-border);
+}
+
+th {
+   border: var(--thick-border);
+}
+
+ul {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
 }
 
 #menu li {
@@ -60,12 +80,11 @@ li {
    color: white;
 }
 
-/* ====================== Practice Selection Page =======================  */
-
-#practice h1 {
-   margin: 1rem auto 0.5rem;
-   text-align: center;
+#menu ul {
+   border-bottom: var(--common-border);
 }
+
+/* ====================== Practice Selection Page =======================  */
 
 #practice form {
    width: 60%;
@@ -102,4 +121,15 @@ li {
    font-size: 0.8rem;
 }
 
-/* ================= Play Page ================ */
+/* ====================== Play Page ====================== */
+
+/* ====================== Result Page ====================== */
+
+#result-table {
+   text-align: center;
+}
+
+#result-table th,
+#result-table td {
+   font-size: 1.2rem;
+}
