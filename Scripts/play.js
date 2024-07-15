@@ -23,7 +23,7 @@ function fillQuestion() {
          currentQuestion += ` ${getRandomFromArray(selection.questionType)} `;
       }
    }
-   correctAnswers = eval(currentQuestion);
+   correctAnswers = eval(currentQuestion).toString().replace("-", "\u2212");
    currentQuestion = currentQuestion
       .replace(/-/g, "&#8722;")
       .replace(/\*/g, "&#215;")
@@ -57,9 +57,11 @@ function displayNextQuestion(answerStatus) {
 document.addEventListener("keydown", (event) => {
    if (event.key.match(/\d|\.|-/)) {
       keyHit.play();
-      answer.innerHTML += event.key;
-      if (answer.innerHTML === correctAnswers.toString()) {
+      answer.innerHTML += event.key === "-" ? "&#8722;" : event.key;
+      if (answer.innerHTML === correctAnswers) {
          displayNextQuestion("correct");
+      } else {
+         console.log(answer.innerHTML, correctAnswers);
       }
    } else if (event.key === "Backspace") {
       answer.innerHTML = answer.innerHTML.slice(0, -1);
