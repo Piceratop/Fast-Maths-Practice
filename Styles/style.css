@@ -123,13 +123,29 @@ ul {
 
 /* ====================== Play Page ====================== */
 
+#timer-bar {
+   display: none;
+   height: 0.4rem;
+   margin-top: 0.2rem;
+   background-color: black;
+}
+
 /* ====================== Result Page ====================== */
 
 #result-table {
+   border: var(--thick-border);
+   display: grid;
+   grid-template-columns: 3fr 1fr auto;
    text-align: center;
 }
 
-#result-table th,
-#result-table td {
+#result-table div {
+   border: var(--common-border);
+   padding: 0.4rem;
    font-size: 1.2rem;
+}
+
+#result-table .header {
+   font-weight: 700;
+   border-bottom: var(--thick-border);
 }

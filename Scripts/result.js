@@ -5,12 +5,14 @@ const complete = new Audio("../Audio/complete.wav");
 complete.play();
 
 result.forEach((element) => {
-   const tr = document.createElement("tr");
-   const tdQuestion = document.createElement("td");
-   const tdAnswer = document.createElement("td");
+   const tdQuestion = document.createElement("div");
+   const tdAnswer = document.createElement("div");
+   const tdValidation = document.createElement("div");
    tdQuestion.innerHTML = element.question;
    tdAnswer.innerHTML = element.answer;
-   tr.appendChild(tdQuestion);
-   tr.appendChild(tdAnswer);
-   resultTable.appendChild(tr);
+   tdValidation.innerHTML =
+      element.status === "correct" ? "&#10004;" : "&#10006;";
+   resultTable.appendChild(tdQuestion);
+   resultTable.appendChild(tdAnswer);
+   resultTable.appendChild(tdValidation);
 });

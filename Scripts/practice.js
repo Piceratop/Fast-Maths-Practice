@@ -53,13 +53,13 @@ startButton.addEventListener("click", function (event) {
             selection.questionType = ["+"];
             break;
          case "addition-subtraction":
-            selection.questionType = ["+", "+", "&#8722;"];
+            selection.questionType = ["+", "-"];
             break;
          case "multiplication":
-            selection.questionType = ["&#215;"];
+            selection.questionType = ["*"];
             break;
          case "division":
-            selection.questionType = ["&#247;"];
+            selection.questionType = ["/"];
             break;
       }
       localStorage.setItem("selection", JSON.stringify(selection));
