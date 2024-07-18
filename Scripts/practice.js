@@ -11,8 +11,8 @@ startButton.addEventListener("click", function (event) {
    const questionSetLength = parseInt(
       document.getElementById("question-set-length").value
    );
-   const minValue = parseInt(document.getElementById("min-value").value);
-   const maxValue = parseInt(document.getElementById("max-value").value);
+   const minValue = document.getElementById("min-value").value;
+   const maxValue = document.getElementById("max-value").value;
    const decimalPlaces = parseInt(
       document.getElementById("decimal-places").value
    );
@@ -34,11 +34,11 @@ startButton.addEventListener("click", function (event) {
    } else if (!questionSetLength || questionSetLength < 1) {
       errorMessage.innerText =
          "Please enter a valid number for question set length.";
-   } else if (isNaN(minValue)) {
+   } else if (!checkValidNumber(minValue)) {
       errorMessage.innerText = "Please enter a valid minimum value.";
-   } else if (isNaN(maxValue)) {
+   } else if (!checkValidNumber(maxValue)) {
       errorMessage.innerText = "Please enter a valid maximum value.";
-   } else if (minValue > maxValue) {
+   } else if (compare(minValue, maxValue) === "greater") {
       errorMessage.innerText =
          "Minimum value must be less than or equal to maximum value.";
    } else if (isNaN(decimalPlaces) || decimalPlaces < 0) {
@@ -62,6 +62,7 @@ startButton.addEventListener("click", function (event) {
             selection.questionType = ["/"];
             break;
       }
+      console.table(selection);
       localStorage.setItem("selection", JSON.stringify(selection));
       window.location.href = "play.html";
    }
