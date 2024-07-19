@@ -27,12 +27,13 @@ function normalize(n) {
          if (n[i] === "0") n = n.slice(0, -1);
          else break;
    else n += ".";
-   while (n[1] !== ".")
-      if (n[0] === "0") n = n.substring(1);
-      else break;
    if (n[0] === "-")
+      while (n[2] !== ".")
+         if (n[1] === "0") n = n[0] + n.substring(2);
+         else break;
+   else
       while (n[1] !== ".")
-         if (n[2] === "0") n = n.substring(1);
+         if (n[0] === "0") n = n.substring(1);
          else break;
    if (n[n.length - 1] === ".") n = n.slice(0, -1);
    return n;
@@ -44,6 +45,7 @@ function absoluteValue(n) {
 }
 
 function ceiling(n) {
+   if (n[0] === "-") return inverse(floor(inverse(n)));
    if (n.includes(".")) {
       decimalN = n.indexOf(".");
       truncated = n.slice(0, decimalN);
@@ -54,6 +56,7 @@ function ceiling(n) {
 }
 
 function floor(n) {
+   if (n[0] === "-") return inverse(ceiling(inverse(n)));
    if (n.includes(".")) n = n.slice(0, n.indexOf("."));
    return normalize(n);
 }
@@ -149,8 +152,6 @@ function subtract(a, b) {
 }
 
 function multiplyInt(a, b) {
-   if (compare(a, b) === "smaller") [a, b] = [b, a];
-   if (compare(b, "0") === "smaller") return inverse(multiply(a, inverse(b)));
    if (a.length > 7) {
       let a_high = a.slice(0, Math.floor(a.length / 2));
       let a_low = a.slice(Math.floor(a.length / 2));
@@ -168,35 +169,19 @@ function multiplyInt(a, b) {
    } else return String(Number(a) * Number(b));
 }
 
-function getRandomInt(min, max) {
-   // return Math.floor(Math.random() * (max - min + 1)) + min;
+function multiply(a, b) {
+   if (compare(a, "0") === "smaller") return inverse(multiply(inverse(a), b));
+   if (compare(b, "0") === "smaller") return inverse(multiply(a, inverse(b)));
+   [a, b] = convertSimilar(a, b);
+   let shift = (a.length - 1 - a.indexOf(".")) << 1;
+   let ans = multiplyInt(a.replace(/\./g, ""), b.replace(/\./g, ""));
+   while (ans.length < shift + 1) ans = "0" + ans;
+   return normalize(
+      ans.slice(0, ans.length - shift) + "." + ans.slice(ans.length - shift)
+   );
 }
 
-// ==================== Test ====================
-
-// Check valid number
-
-console.log(checkValidNumber("10..23"));
-
-// Add
-
-console.log(add("10", "-7"));
-console.log(add("10.23", "7.23"));
-console.log(add("-10.23", "7.23"));
-console.log(add("-10.23", "-7.23"));
-console.log(add("123456789123456789123456789", "123456789123456789123456789"));
-
-// Subtract
-
-console.log(subtract("10.23", "-7.23"));
-console.log(subtract("10.23", "7.23"));
-console.log(subtract("-10.23", "7.23"));
-console.log(subtract("-10.23", "-7.23"));
-console.log(
-   subtract("123456789123456789123456789", "123456789123456789123456789")
-);
-
-// Multiply Int
-
-console.log(multiplyInt("123", "132"));
-console.log(multiplyInt("223344556677", "223344556677"));
+function getRandomInt(min, max) {
+   let a = String(Math.random());
+   return floor(add(multiply(a, add(subtract(max, min), "1")), min));
+}
