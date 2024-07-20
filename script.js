@@ -27,7 +27,8 @@ function normalize(n) {
          if (n[i] === "0") n = n.slice(0, -1);
          else break;
    else n += ".";
-   if (n[0] === "-")
+   if (n[0] === "-") n = "\u2212" + n.substring(1);
+   if (n[0] === "\u2212")
       while (n[2] !== ".")
          if (n[1] === "0") n = n[0] + n.substring(2);
          else break;
@@ -36,16 +37,17 @@ function normalize(n) {
          if (n[0] === "0") n = n.substring(1);
          else break;
    if (n[n.length - 1] === ".") n = n.slice(0, -1);
+   if (n === "−0") return "0";
    return n;
 }
 
 function absoluteValue(n) {
-   if (n[0] === "-") n = n.slice(1);
+   if (n[0] === "-" || n[0] === "\u2212") n = n.slice(1);
    return normalize(n);
 }
 
 function ceiling(n) {
-   if (n[0] === "-") return inverse(floor(inverse(n)));
+   if (n[0] === "-" || n[0] === "\u2212") return inverse(floor(inverse(n)));
    if (n.includes(".")) {
       decimalN = n.indexOf(".");
       truncated = n.slice(0, decimalN);
@@ -56,13 +58,13 @@ function ceiling(n) {
 }
 
 function floor(n) {
-   if (n[0] === "-") return inverse(ceiling(inverse(n)));
+   if (n[0] === "-" || n[0] === "\u2212") return inverse(ceiling(inverse(n)));
    if (n.includes(".")) n = n.slice(0, n.indexOf("."));
    return normalize(n);
 }
 
 function inverse(n) {
-   if (n[0] === "-") return normalize(n.slice(1));
+   if (n[0] === "-" || n[0] === "\u2212") return normalize(n.slice(1));
    return normalize("-" + n);
 }
 
@@ -82,7 +84,16 @@ function convertSimilar(a, b) {
 }
 
 function compare(a, b) {
+   [a, b] = [normalize(a), normalize(b)];
    let isNegative = false;
+   switch ((a[0] === "−") + (b[0] === "−") * 2) {
+      case 1:
+         return "smaller";
+      case 2:
+         return "greater";
+      case 3:
+         isNegative = true;
+   }
    [a, b] = convertSimilar(a, b);
    for (let i = 0; i < a.length; i++) {
       if (a[i] > b[i]) {
@@ -182,6 +193,10 @@ function multiply(a, b) {
 }
 
 function getRandomInt(min, max) {
-   let a = String(Math.random());
-   return floor(add(multiply(a, add(subtract(max, min), "1")), min));
+   seed = String(Math.random());
+   while (min.length >= seed.length && max.length >= seed.length)
+      seed += String(Math.random()).substring(2);
+   return floor(
+      add(multiply(String(Math.random()), add(subtract(max, min), "1")), min)
+   );
 }

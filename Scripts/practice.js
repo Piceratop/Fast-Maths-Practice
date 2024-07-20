@@ -53,16 +53,15 @@ startButton.addEventListener("click", function (event) {
             selection.questionType = ["+"];
             break;
          case "addition-subtraction":
-            selection.questionType = ["+", "-"];
+            selection.questionType = ["+", "−"];
             break;
          case "multiplication":
-            selection.questionType = ["*"];
+            selection.questionType = ["×"];
             break;
          case "division":
-            selection.questionType = ["/"];
+            selection.questionType = ["÷"];
             break;
       }
-      console.table(selection);
       localStorage.setItem("selection", JSON.stringify(selection));
       window.location.href = "play.html";
    }

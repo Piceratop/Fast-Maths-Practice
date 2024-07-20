@@ -17,24 +17,22 @@ function fillQuestion() {
    for (let i = 1; i <= selection.questionLength; i++) {
       currentTerms = getRandomInt(selection.minValue, selection.maxValue);
       currentQuestion += `${
-         currentTerms < 0 ? "(" + currentTerms + ")" : currentTerms
+         compare(currentTerms, "0") === "smaller"
+            ? `(${currentTerms})`
+            : currentTerms
       }`;
       if (i < selection.questionLength) {
          currentQuestion += ` ${getRandomFromArray(selection.questionType)} `;
       }
    }
-   correctAnswers = eval(currentQuestion).toString().replace("-", "\u2212");
-   currentQuestion = currentQuestion
-      .replace(/-/g, "&#8722;")
-      .replace(/\*/g, "&#215;")
-      .replace(/\//g, "&#247;");
+
    question.innerHTML = currentQuestion;
 
-   allQuestions.push({
-      question: currentQuestion,
-      answer: correctAnswers,
-      status: "pending",
-   });
+   // allQuestions.push({
+   //    question: currentQuestion,
+   //    answer: correctAnswers,
+   //    status: "pending",
+   // });
 }
 
 fillQuestion();
@@ -54,31 +52,31 @@ function displayNextQuestion(answerStatus) {
    }
 }
 
-document.addEventListener("keydown", (event) => {
-   if (event.key.match(/\d|\.|-/)) {
-      keyHit.play();
-      answer.innerHTML += event.key === "-" ? "&#8722;" : event.key;
-      if (answer.innerHTML === correctAnswers) {
-         displayNextQuestion("correct");
-      } else {
-         console.log(answer.innerHTML, correctAnswers);
-      }
-   } else if (event.key === "Backspace") {
-      answer.innerHTML = answer.innerHTML.slice(0, -1);
-      keyHit.play();
-   } else if (event.key === "Delete") {
-      answer.innerHTML = "";
-      keyHit.play();
-   }
-});
+// document.addEventListener("keydown", (event) => {
+//    if (event.key.match(/\d|\.|-/)) {
+//       keyHit.play();
+//       answer.innerHTML += event.key === "-" ? "&#8722;" : event.key;
+//       if (answer.innerHTML === correctAnswers) {
+//          displayNextQuestion("correct");
+//       } else {
+//          console.log(answer.innerHTML, correctAnswers);
+//       }
+//    } else if (event.key === "Backspace") {
+//       answer.innerHTML = answer.innerHTML.slice(0, -1);
+//       keyHit.play();
+//    } else if (event.key === "Delete") {
+//       answer.innerHTML = "";
+//       keyHit.play();
+//    }
+// });
 
-if (timer > 0) {
-   timerBar.style.display = "block";
-   setInterval(() => {
-      timer -= 0.01;
-      timerBar.style.width = `${(timer / selection.timer) * 100}%`;
-      if (timer <= 0) {
-         displayNextQuestion("incorrect");
-      }
-   }, 10);
-}
+// if (timer > 0) {
+//    timerBar.style.display = "block";
+//    setInterval(() => {
+//       timer -= 0.01;
+//       timerBar.style.width = `${(timer / selection.timer) * 100}%`;
+//       if (timer <= 0) {
+//          displayNextQuestion("incorrect");
+//       }
+//    }, 10);
+// }
