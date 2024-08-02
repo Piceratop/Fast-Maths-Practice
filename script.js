@@ -106,9 +106,8 @@ function compare(a, b) {
             return "greater";
          }
          return "smaller";
-      } else if (a[i] === "-") {
-         isNegative = true;
       }
+      z;
    }
    return "equal";
 }
