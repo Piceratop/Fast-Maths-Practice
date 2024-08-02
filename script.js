@@ -107,7 +107,6 @@ function compare(a, b) {
          }
          return "smaller";
       }
-      z;
    }
    return "equal";
 }
@@ -162,6 +161,8 @@ function subtract(a, b) {
 }
 
 function multiplyInt(a, b) {
+   [a, b] = convertSimilar(a, b);
+   [a, b] = [a.slice(0, -1), b.slice(0, -1)];
    if (a.length > 7) {
       let a_high = a.slice(0, Math.floor(a.length / 2));
       let a_low = a.slice(Math.floor(a.length / 2));
@@ -176,14 +177,16 @@ function multiplyInt(a, b) {
       for (let i = 0; i < a_low.length + b_low.length; i++) c1 += "0";
       for (let i = 0; i < a_low.length; i++) c2 += "0";
       return add(add(c1, c2), c3);
-   } else return String(Number(a) * Number(b));
+   } else {
+      return String(Number(a) * Number(b));
+   }
 }
 
 function multiply(a, b) {
    if (compare(a, "0") === "smaller") return inverse(multiply(inverse(a), b));
    if (compare(b, "0") === "smaller") return inverse(multiply(a, inverse(b)));
    [a, b] = convertSimilar(a, b);
-   let shift = (a.length - 1 - a.indexOf(".")) << 1;
+   let shift = (a.length - 1 - a.indexOf(".")) * 2;
    let ans = multiplyInt(a.replace(/\./g, ""), b.replace(/\./g, ""));
    while (ans.length < shift + 1) ans = "0" + ans;
    return normalize(
